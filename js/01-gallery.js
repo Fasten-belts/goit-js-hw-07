@@ -34,23 +34,17 @@ function onClickImage(evt) {
 
   const modalContent = `<img src="${evt.target.dataset.source}" alt="" />`;
   const instance = basicLightbox.create(modalContent, {
-    onShow: (instance) => {
-      document.addEventListener("keydown", (evt) => {
-        if (evt.key === "Escape") {
-          instance.close();
-        }
-      });
-    },
+    onShow: () => document.addEventListener("keydown", onKeyDown),
 
-    onClose: (instance) => {
-      document.removeEventListener("keydown", (evt) => {
-        if (evt.key === "Escape") {
-          instance.close();
-        }
-      });
-    },
+    onClose: () => document.removeEventListener("keydown", onKeyDown),
   });
   instance.show();
+
+  function onKeyDown(evt) {
+    if (evt.key === "Escape") {
+      instance.close();
+    }
+  }
 }
 
 console.log(galleryItems);
