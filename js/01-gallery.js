@@ -34,7 +34,7 @@ function onClickImage(evt) {
 
   const modalContent = `<img src="${evt.target.dataset.source}" alt="" />`;
   const instance = basicLightbox.create(modalContent, {
-    onShow: () => {
+    onShow: (instance) => {
       document.addEventListener("keydown", (evt) => {
         if (evt.key === "Escape") {
           instance.close();
@@ -42,7 +42,7 @@ function onClickImage(evt) {
       });
     },
 
-    onClose: () => {
+    onClose: (instance) => {
       document.removeEventListener("keydown", (evt) => {
         if (evt.key === "Escape") {
           instance.close();
@@ -51,7 +51,6 @@ function onClickImage(evt) {
     },
   });
   instance.show();
-  //   }
 }
 
 console.log(galleryItems);

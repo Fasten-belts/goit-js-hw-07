@@ -17,18 +17,10 @@ function createMarkupItems(arr) {
 }
 gallery.insertAdjacentHTML("beforeend", createMarkupItems(galleryItems));
 
-let galleryImage = new SimpleLightbox(".gallery a", {
+const galleryImage = new SimpleLightbox(".gallery a", {
   captionsData: "alt",
   captionDelay: 250,
   navText: ["<", ">"],
-});
-
-galleryImage.on("show.simplelightbox", () => {
-  console.log(
-    galleryImage,
-    galleryImage.options.captionsData,
-    galleryImage.options.captionDelay
-  );
 });
 
 console.log(galleryItems);
