@@ -31,9 +31,9 @@ gallery.addEventListener("click", (evt) => {
 
   galleryImage.on("show.simplelightbox", () => {
     console.log(
-      gallery,
-      gallery.options.captionsData,
-      gallery.options.captionDelay
+      galleryImage,
+      galleryImage.options.captionsData,
+      galleryImage.options.captionDelay
     );
   });
 });
