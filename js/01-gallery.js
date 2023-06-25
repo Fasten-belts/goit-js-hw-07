@@ -28,44 +28,30 @@ gallery.addEventListener("click", onClickImage);
 function onClickImage(evt) {
   evt.preventDefault();
 
-  const imageLink = evt.target.closest(".gallery__link");
-
-  if (imageLink) {
-    const itemId = imageLink.href;
-    const modalContent = `<img src="${itemId}" alt="" />`;
-    const instance = basicLightbox.create(modalContent);
-    instance.show();
-
-    window.addEventListener("keydown", (evt) => {
-      if (evt.key === "Escape") {
-        instance.close();
-      }
-    });
-    //   const imageItem = evt.target.closest(".gallery__item");
-
-    //   if (imageItem) {
-    //     const itemId = imageItem.querySelector(".gallery__image").dataset.source;
-
-    // const instance = basicLightbox.create(
-    //   createModalImage(findImageItem(itemId))
-    // );
-    // instance.show();
-
-    //     const modalContent = `<img src="${itemId}" alt=""/>`;
-    //     const instance = basicLightbox.create(modalContent);
-    //     instance.show();
-    //   }
+  if (!evt.target.classList.contains("gallery__image")) {
+    return;
   }
+
+  const modalContent = `<img src="${evt.target.dataset.source}" alt="" />`;
+  const instance = basicLightbox.create(modalContent, {
+    onShow: () => {
+      document.addEventListener("keydown", (evt) => {
+        if (evt.key === "Escape") {
+          instance.close();
+        }
+      });
+    },
+
+    onClose: () => {
+      document.removeEventListener("keydown", (evt) => {
+        if (evt.key === "Escape") {
+          instance.close();
+        }
+      });
+    },
+  });
+  instance.show();
+  //   }
 }
-
-// function createModalImage({ original, description } = {}) {
-//   return `<li>
-//     <img src="${original}" alt="${description}" width = "100%">
-//   </li>`;
-// }
-
-// function findImageItem(itemId) {
-//   return galleryItems.find(({ original }) => original === itemId);
-// }
 
 console.log(galleryItems);

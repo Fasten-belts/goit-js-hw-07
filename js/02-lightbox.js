@@ -23,19 +23,12 @@ let galleryImage = new SimpleLightbox(".gallery a", {
   navText: ["<", ">"],
 });
 
-gallery.addEventListener("click", (evt) => {
-  evt.preventDefault();
-  if (!evt.target.classList.contains("gallery__image")) {
-    return;
-  }
-
-  galleryImage.on("show.simplelightbox", () => {
-    console.log(
-      galleryImage,
-      galleryImage.options.captionsData,
-      galleryImage.options.captionDelay
-    );
-  });
+galleryImage.on("show.simplelightbox", () => {
+  console.log(
+    galleryImage,
+    galleryImage.options.captionsData,
+    galleryImage.options.captionDelay
+  );
 });
 
 console.log(galleryItems);
